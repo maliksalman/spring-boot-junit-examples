@@ -1,6 +1,13 @@
 package com.example.tests;
 
+import java.time.OffsetDateTime;
+import java.util.Optional;
+
 public interface HeroRepository {
 
-    public void save(Hero hero);
+    void save(Hero hero);
+
+    Optional<Hero> findByName(String name);
+
+    Optional<OffsetDateTime> getLatestMovieReleaseDate(String name);
 }

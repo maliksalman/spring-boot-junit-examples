@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SaveHeroEventHandler {
 
-    private ObjectMapper mapper;
-    private HeroRepository repository;
-    private HeroNameValidator validator;
+    private final ObjectMapper mapper;
+    private final HeroRepository repository;
+    private final HeroNameValidator validator;
 
     public SaveHeroEventHandler(ObjectMapper mapper, HeroRepository repository, HeroNameValidator validator) {
         this.mapper = mapper;
@@ -33,8 +33,6 @@ public class SaveHeroEventHandler {
         }
 
         // save it
-        if (hero != null) {
-            repository.save(hero);
-        }
+        repository.save(hero);
     }
 }
