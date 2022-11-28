@@ -24,8 +24,9 @@ public class RemoteHeroGetter {
 
     public Hero findHero(String name) throws HeroNotFoundException, TimeoutException {
         try {
-            ResponseEntity<Hero> response = template.getForEntity( "/heroes/{name}", Hero.class, name);
-            return response.getBody();
+            return template
+                    .getForEntity( "/heroes/{name}", Hero.class, name)
+                    .getBody();
         } catch (HttpClientErrorException e) {
             if (e.getRawStatusCode() == 404) {
                 throw new HeroNotFoundException(name);
@@ -63,9 +64,7 @@ public class RemoteHeroGetter {
         CREATED,
         UPDATED,
         UNKNOWN
-    };
-
-    public static class TimeoutException extends RuntimeException {
-
     }
+
+    public static class TimeoutException extends RuntimeException { }
 }
