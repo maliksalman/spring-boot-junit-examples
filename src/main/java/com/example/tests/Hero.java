@@ -2,6 +2,26 @@ package com.example.tests;
 
 public class Hero {
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRealFirstName(String realFirstName) {
+        this.realFirstName = realFirstName;
+    }
+
+    public void setRealLastName(String realLastName) {
+        this.realLastName = realLastName;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setUniverse(String universe) {
+        this.universe = universe;
+    }
+
     private String name;
     private String realFirstName;
     private String realLastName;
@@ -15,6 +35,8 @@ public class Hero {
         this.city = city;
         this.universe = universe;
     }
+
+    public Hero() { }
 
     public String getName() {
         return name;

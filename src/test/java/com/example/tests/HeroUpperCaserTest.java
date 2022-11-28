@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class HeroUpperCaserTest {
 
-    HeroUpperCaser upperCaser;
+    HeroUpperCaser underTest;
     HeroRepository repository;
 
 
     @BeforeEach
     void setup() {
         repository = Mockito.mock(HeroRepository.class);
-        upperCaser = new HeroUpperCaser(repository);
+        underTest = new HeroUpperCaser(repository);
     }
 
     @Test
@@ -31,7 +31,7 @@ class HeroUpperCaserTest {
 
         // WHEN + THEN
         Assertions.assertThrows(HeroNotFoundException.class, () -> {
-            upperCaser.getHeroInUpperCase("hulk");
+            underTest.getHeroInUpperCase("hulk");
         });
     }
 
@@ -49,7 +49,7 @@ class HeroUpperCaserTest {
                 .thenReturn(Optional.of(hulk));
 
         // WHEN
-        Hero hero = upperCaser.getHeroInUpperCase("hulk");
+        Hero hero = underTest.getHeroInUpperCase("hulk");
 
         // THEN
         assertThat(hero.getName()).isEqualTo("HULK");

@@ -19,5 +19,4 @@ public class HeroUpperCaser {
                 hero.getCity().toUpperCase(),
                 hero.getUniverse().toUpperCase());
     }
-
 }

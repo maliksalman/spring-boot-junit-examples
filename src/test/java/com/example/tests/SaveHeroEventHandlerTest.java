@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SaveHeroEventHandlerTest {
 
-    SaveHeroEventHandler handler;
+    SaveHeroEventHandler underTest;
     HeroRepository repository;
 
 
     @BeforeEach
     void setup() {
         repository = Mockito.mock(HeroRepository.class);
-        handler = new SaveHeroEventHandler(new ObjectMapper(), repository, new HeroNameValidator());
+        underTest = new SaveHeroEventHandler(new ObjectMapper(), repository, new HeroNameValidator());
     }
 
 
@@ -29,11 +29,13 @@ class SaveHeroEventHandlerTest {
         String eventJson = "{ \"heroName\": \"spiderman\" }";
 
         // WHEN
-        handler.handle(eventJson);
+        underTest.handle(eventJson);
 
         // THEN
         ArgumentCaptor<Hero> captor = ArgumentCaptor.forClass(Hero.class);
-        Mockito.verify(repository, Mockito.times(1)).save(captor.capture());
+        Mockito
+                .verify(repository, Mockito.times(1))
+                .save(captor.capture());
 
         Hero capturedHero = captor.getValue();
         assertThat(capturedHero.getRealFirstName()).isEqualTo("Peter");
@@ -50,7 +52,7 @@ class SaveHeroEventHandlerTest {
 
         // WHEN + THEN
         Assertions.assertThrows(HeroNotFoundException.class, () -> {
-            handler.handle(eventJson);
+            underTest.handle(eventJson);
         });
     }
 }

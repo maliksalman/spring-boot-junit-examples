@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HeroSentimentCheckerTest {
 
     HeroRepository repository;
-    HeroSentimentChecker sentimentChecker;
+    HeroSentimentChecker underTest;
 
     @BeforeEach
     void setup() {
         repository = Mockito.mock(HeroRepository.class);
-        sentimentChecker = new HeroSentimentChecker(repository) {
+        underTest = new HeroSentimentChecker(repository) {
             @Override
             protected OffsetDateTime getCurrentTime() {
                 return OffsetDateTime.parse("2022-12-12T20:20:20Z");
@@ -36,7 +36,7 @@ class HeroSentimentCheckerTest {
                 .thenReturn(Optional.of(OffsetDateTime.parse("2023-01-12T20:20:20Z")));
 
         // WHEN
-        HeroSentimentChecker.Sentiment sentiment = sentimentChecker.getSentiment("the-flash");
+        HeroSentimentChecker.Sentiment sentiment = underTest.getSentiment("the-flash");
 
         // THEN
         assertThat(sentiment).isEqualTo(EXCITED);
@@ -51,7 +51,7 @@ class HeroSentimentCheckerTest {
                 .thenReturn(Optional.of(OffsetDateTime.parse("2022-11-28T20:20:20Z")));
 
         // WHEN
-        HeroSentimentChecker.Sentiment sentiment = sentimentChecker.getSentiment("black-panther");
+        HeroSentimentChecker.Sentiment sentiment = underTest.getSentiment("black-panther");
 
         // THEN
         assertThat(sentiment).isEqualTo(AMUSED);
@@ -66,7 +66,7 @@ class HeroSentimentCheckerTest {
                 .thenReturn(Optional.of(OffsetDateTime.parse("2022-06-12T20:20:20Z")));
 
         // WHEN
-        HeroSentimentChecker.Sentiment sentiment = sentimentChecker.getSentiment("wonder-woman");
+        HeroSentimentChecker.Sentiment sentiment = underTest.getSentiment("wonder-woman");
 
         // THEN
         assertThat(sentiment).isEqualTo(BORED);
@@ -81,7 +81,7 @@ class HeroSentimentCheckerTest {
                 .thenReturn(Optional.of(OffsetDateTime.parse("2019-12-12T20:20:20Z")));
 
         // WHEN
-        HeroSentimentChecker.Sentiment sentiment = sentimentChecker.getSentiment("aquaman");
+        HeroSentimentChecker.Sentiment sentiment = underTest.getSentiment("aquaman");
 
         // THEN
         assertThat(sentiment).isEqualTo(FORGOTTEN);
@@ -96,7 +96,7 @@ class HeroSentimentCheckerTest {
                 .thenReturn(Optional.empty());
 
         // WHEN
-        HeroSentimentChecker.Sentiment sentiment = sentimentChecker.getSentiment("heman");
+        HeroSentimentChecker.Sentiment sentiment = underTest.getSentiment("heman");
 
         // THEN
         assertThat(sentiment).isEqualTo(FORGOTTEN);
