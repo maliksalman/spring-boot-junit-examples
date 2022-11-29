@@ -25,7 +25,7 @@ public class RemoteHeroGetter {
     public Hero findHero(String name) throws HeroNotFoundException, TimeoutException {
         try {
             return template
-                    .getForEntity( "/heroes/{name}", Hero.class, name)
+                    .getForEntity( "/remote/heroes/{name}", Hero.class, name)
                     .getBody();
         } catch (HttpClientErrorException e) {
             if (e.getRawStatusCode() == 404) {
@@ -43,7 +43,7 @@ public class RemoteHeroGetter {
         ResponseEntity<Void> response = null;
 
         try {
-            response = template.exchange("/heroes",
+            response = template.exchange("/remote/heroes",
                     HttpMethod.POST,
                     new HttpEntity<>(hero),
                     Void.class);
