@@ -10,6 +10,10 @@ public class HeroSentimentChecker {
         this.repository = repository;
     }
 
+    protected OffsetDateTime getCurrentTime() {
+        return OffsetDateTime.now();
+    }
+
     public Sentiment getSentiment(String hero) {
 
         OffsetDateTime currentTime = getCurrentTime();
@@ -34,10 +38,6 @@ public class HeroSentimentChecker {
         // if a move came out more than a year ago or never,
         // we have forgotten the hero
         return Sentiment.FORGOTTEN;
-    }
-
-    protected OffsetDateTime getCurrentTime() {
-        return OffsetDateTime.now();
     }
 
     enum Sentiment {
