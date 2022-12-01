@@ -21,20 +21,6 @@ class HeroUpperCaserTest {
     }
 
     @Test
-    void getHeroInUpperCase_heroNotFound() {
-
-        // GIVEN
-        Mockito
-                .when(repository.findByName("hulk"))
-                .thenReturn(Optional.empty());
-
-        // WHEN + THEN
-        Assertions.assertThrows(HeroNotFoundException.class, () -> {
-            underTest.getHeroInUpperCase("hulk");
-        });
-    }
-
-    @Test
     void getHeroInUpperCase_allOK() throws HeroNotFoundException {
 
         // GIVEN
@@ -56,5 +42,19 @@ class HeroUpperCaserTest {
         assertThat(hero.getRealLastName()).isEqualTo("BANNER");
         assertThat(hero.getCity()).isEqualTo("NYC");
         assertThat(hero.getUniverse()).isEqualTo("MCU");
+    }
+
+    @Test
+    void getHeroInUpperCase_heroNotFound() {
+
+        // GIVEN
+        Mockito
+                .when(repository.findByName("hulk"))
+                .thenReturn(Optional.empty());
+
+        // WHEN + THEN
+        Assertions.assertThrows(HeroNotFoundException.class, () -> {
+            underTest.getHeroInUpperCase("hulk");
+        });
     }
 }
