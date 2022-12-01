@@ -8,7 +8,9 @@ public class SaveHeroEventHandler {
     private final HeroRepository repository;
     private final HeroNameValidator validator;
 
-    public SaveHeroEventHandler(ObjectMapper mapper, HeroRepository repository, HeroNameValidator validator) {
+    public SaveHeroEventHandler(ObjectMapper mapper,
+                                HeroRepository repository,
+                                HeroNameValidator validator) {
         this.mapper = mapper;
         this.repository = repository;
         this.validator = validator;
@@ -27,9 +29,17 @@ public class SaveHeroEventHandler {
         // convert to Hero object
         Hero hero = null;
         if (event.getHeroName().equals("superman")) {
-            hero = new Hero("superman", "Clark", "Kent", "Metropolis", "DC");
+            hero = new Hero("superman",
+                    "Clark",
+                    "Kent",
+                    "Metropolis",
+                    "DC");
         } else if (event.getHeroName().equals("spiderman")) {
-            hero = new Hero("spiderman", "Peter", "Parker", "NYC", "MCU");
+            hero = new Hero("spiderman",
+                    "Peter",
+                    "Parker",
+                    "NYC",
+                    "MCU");
         }
 
         // save it

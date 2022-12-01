@@ -2,6 +2,7 @@ package com.example.tests;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,10 @@ class RemoteHeroGetterTest {
         underTest = new RemoteHeroGetter(mockServer.baseUrl(), 500);
     }
 
+    @AfterEach
+    void tearDown() {
+        mockServer.stop();
+    }
 
     @Test
     void findHero_found() throws HeroNotFoundException {

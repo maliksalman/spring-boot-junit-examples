@@ -18,7 +18,9 @@ class SaveHeroEventHandlerTest {
     @BeforeEach
     void setup() {
         repository = Mockito.mock(HeroRepository.class);
-        underTest = new SaveHeroEventHandler(new ObjectMapper(), repository, new HeroNameValidator());
+        underTest = new SaveHeroEventHandler(new ObjectMapper(),
+                repository,
+                new HeroNameValidator());
     }
 
 

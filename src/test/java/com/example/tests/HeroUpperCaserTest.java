@@ -14,7 +14,6 @@ class HeroUpperCaserTest {
     HeroUpperCaser underTest;
     HeroRepository repository;
 
-
     @BeforeEach
     void setup() {
         repository = Mockito.mock(HeroRepository.class);
