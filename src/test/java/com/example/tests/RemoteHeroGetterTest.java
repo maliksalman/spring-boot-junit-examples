@@ -37,13 +37,15 @@ class RemoteHeroGetterTest {
     void findHero_found() throws HeroNotFoundException {
 
         // GIVEN
-        String jsonString = "{\n" +
-                "  \"name\": \"hulk\",\n" +
-                "  \"realFirstName\": \"Bruce\",\n" +
-                "  \"realLastName\": \"Banner\",\n" +
-                "  \"city\": \"nyc\",\n" +
-                "  \"universe\": \"mcu\"\n" +
-                "}";
+        String jsonString = """
+                {
+                  "name": "hulk",
+                  "realFirstName": "Bruce",
+                  "realLastName": "Banner",
+                  "city": "nyc",
+                  "universe": "mcu"
+                }\
+                """;
         mockServer.stubFor(get(urlEqualTo("/remote/heroes/hulk"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
@@ -107,13 +109,15 @@ class RemoteHeroGetterTest {
     void createUpdateHero_created() {
 
         // GIVEN
-        String expectedJsonString = "{\n" +
-                "  \"name\": \"hulk\",\n" +
-                "  \"realFirstName\": \"Bruce\",\n" +
-                "  \"realLastName\": \"Banner\",\n" +
-                "  \"city\": \"nyc\",\n" +
-                "  \"universe\": \"mcu\"\n" +
-                "}";
+        String expectedJsonString = """
+                {
+                  "name": "hulk",
+                  "realFirstName": "Bruce",
+                  "realLastName": "Banner",
+                  "city": "nyc",
+                  "universe": "mcu"
+                }\
+                """;
         mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
                 .withRequestBody(equalToJson(expectedJsonString))
                 .withHeader("Content-Type", equalTo("application/json"))
