@@ -17,7 +17,7 @@ public class RemoteHeroGetter {
     public RemoteHeroGetter(String baseUrl, int readTimeoutMillis) {
         this.template = new RestTemplateBuilder()
                 .rootUri(baseUrl)
-                .setReadTimeout(Duration.ofMillis(readTimeoutMillis))
+                .readTimeout(Duration.ofMillis(readTimeoutMillis))
                 .build();
     }
 
