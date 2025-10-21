@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RemoteHeroGetterTest {
 
-
     WireMockServer mockServer;
     RemoteHeroGetter underTest;
 
@@ -46,7 +45,7 @@ class RemoteHeroGetterTest {
                   "universe": "mcu"
                 }\
                 """;
-        mockServer.stubFor(get(urlEqualTo("/remote/heroes/hulk"))
+        mockServer.stubFor(get("/remote/heroes/hulk")
                 .willReturn(aResponse()
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                         .withBody(jsonString)));
@@ -67,7 +66,7 @@ class RemoteHeroGetterTest {
     void findHero_notFound() {
 
         // GIVEN
-        mockServer.stubFor(get(urlEqualTo("/remote/heroes/heman"))
+        mockServer.stubFor(get("/remote/heroes/heman")
                 .willReturn(aResponse().withStatus(404)));
 
         // WHEN + THEN
@@ -81,7 +80,7 @@ class RemoteHeroGetterTest {
     void findHero_somethingWrongOnServer() {
 
         // GIVEN
-        mockServer.stubFor(get(urlEqualTo("/remote/heroes/heman"))
+        mockServer.stubFor(get("/remote/heroes/heman")
                 .willReturn(aResponse().withStatus(500)));
 
         // WHEN + THEN
@@ -94,7 +93,7 @@ class RemoteHeroGetterTest {
     void findHero_timedOut() {
 
         // GIVEN
-        mockServer.stubFor(get(urlEqualTo("/remote/heroes/heman"))
+        mockServer.stubFor(get("/remote/heroes/heman")
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withFixedDelay(1000)));
@@ -118,7 +117,8 @@ class RemoteHeroGetterTest {
                   "universe": "mcu"
                 }\
                 """;
-        mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
+
+        mockServer.stubFor(post("/remote/heroes")
                 .withRequestBody(equalToJson(expectedJsonString))
                 .withHeader("Content-Type", equalTo("application/json"))
                 .willReturn(aResponse().withStatus(201)));
@@ -139,7 +139,7 @@ class RemoteHeroGetterTest {
     void createUpdateHero_updated() {
 
         // GIVEN
-        mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
+        mockServer.stubFor(post("/remote/heroes")
                 .willReturn(aResponse().withStatus(202)));
 
         // WHEN
@@ -158,7 +158,7 @@ class RemoteHeroGetterTest {
     void createUpdateHero_unknownButOK() {
 
         // GIVEN
-        mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
+        mockServer.stubFor(post("/remote/heroes")
                 .willReturn(aResponse().withStatus(200)));
 
         // WHEN
@@ -177,7 +177,7 @@ class RemoteHeroGetterTest {
     void createUpdateHero_unexpectedProblem() {
 
         // GIVEN
-        mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
+        mockServer.stubFor(post("/remote/heroes")
                 .willReturn(aResponse().withStatus(500)));
 
         // WHEN + THEN
@@ -195,7 +195,7 @@ class RemoteHeroGetterTest {
     void createUpdateHero_timedOut() {
 
         // GIVEN
-        mockServer.stubFor(post(urlEqualTo("/remote/heroes"))
+        mockServer.stubFor(post("/remote/heroes")
                 .willReturn(aResponse()
                         .withStatus(201)
                         .withFixedDelay(1000)));

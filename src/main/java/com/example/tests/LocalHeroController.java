@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/local/heroes")
+@RequestMapping({"/local/heroes", "/local/heroes/"})
 public class LocalHeroController {
 
     private final HeroRepository repository;
@@ -17,7 +17,7 @@ public class LocalHeroController {
         this.repository = repository;
     }
 
-    @GetMapping("/{name}/release-date")
+    @GetMapping({"/{name}/release-date", "/{name}/release-date/"})
     public ReleaseDateResult findReleaseDate(@PathVariable String name) {
         return repository.getLatestMovieReleaseDate(name)
                 .map(time -> new ReleaseDateResult(time.toLocalDate()))
